@@ -68,14 +68,6 @@ CREATE TABLE Player(
 	FOREIGN KEY (CID) REFERENCES Country(CID)
 );
 
-CREATE TABLE Medals(
-	PID INT ,
-	Year INT ,
-	Type TEXT,
-	Event TEXT,
-	PRIMARY KEY (PID,Year,Type,Event),
-	FOREIGN KEY (PID) REFERENCES Player(PID)
-);
 
 CREATE TABLE Player_association(
 	PID INT ,
@@ -89,6 +81,8 @@ CREATE TABLE Player_association(
 CREATE TABLE Player_participation(
 	PID INT ,
 	EvID INT ,
+	Year INT,
+	Result NUMERIC (6,2)
 	PRIMARY KEY (PID,EvID),
 	FOREIGN KEY (PID) REFERENCES Player(PID) ,
 	FOREIGN KEY (EvID) REFERENCES Event(EvID) 
