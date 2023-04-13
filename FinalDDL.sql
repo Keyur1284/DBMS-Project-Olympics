@@ -570,3 +570,45 @@ INSERT INTO Player_association VALUES (17,2,2);
 INSERT INTO Player_association VALUES (18,3,3);
 INSERT INTO Player_association VALUES (19,4,2);
 INSERT INTO Player_association VALUES (20,5,1);
+
+--Inserting in Olympic host
+
+INSERT INTO Olympic_host VALUES (1,2023,50,10,8.91,3);
+INSERT INTO Olympic_host VALUES (2,2015,45,9,9.01,2);
+INSERT INTO Olympic_host VALUES (3,2019,47,11,7.99,1);
+INSERT INTO Olympic_host VALUES (5,2011,55,7,9.00,4);
+INSERT INTO Olympic_host VALUES (6,2007,40,12,8.07,5);
+
+--Next
+
+--Inserting in Olympic staff
+INSERT INTO Olympic_staff VALUES (1,1,'Savant kumar','Supervisor');
+INSERT INTO Olympic_staff VALUES (1,2,'Aakash Patel','Electrician');
+INSERT INTO Olympic_staff VALUES (1,3,'Abhishek Chaudhary','Doctor');
+INSERT INTO Olympic_staff VALUES (1,4,'Ashirvad Singh','General');
+INSERT INTO Olympic_staff VALUES (1,5,'Deepanshu Sharma','Worker');
+
+INSERT INTO Olympic_staff VALUES (2,1,'Alex Carey','Supervisor');
+INSERT INTO Olympic_staff VALUES (2,2,'Sam Curran','Electrician');
+INSERT INTO Olympic_staff VALUES (2,3,'Chris Jordan','Doctor');
+INSERT INTO Olympic_staff VALUES (2,4,'Mark Gates','General');
+INSERT INTO Olympic_staff VALUES (2,5,'Bill Zuckerberg','Worker');
+
+INSERT INTO Olympic_staff VALUES (3,1,'Jeff Gezos','Supervisor');
+INSERT INTO Olympic_staff VALUES (3,2,'Warren Buffet','Electrician');
+INSERT INTO Olympic_staff VALUES (3,3,'Mitchell Smith','Doctor');
+INSERT INTO Olympic_staff VALUES (3,4,'Steve Starc','General');
+INSERT INTO Olympic_staff VALUES (3,5,'Ellyse Perry','Worker');
+
+INSERT INTO Olympic_staff VALUES (4,1,'Chang zi','Supervisor');
+INSERT INTO Olympic_staff VALUES (4,2,'Fang Li','Electrician');
+INSERT INTO Olympic_staff VALUES (4,3,'Yan Xiu','Doctor');
+INSERT INTO Olympic_staff VALUES (4,4,'Marco Van Der Dussen','General');
+INSERT INTO Olympic_staff VALUES (4,5,'Usman Baghdadi','Worker');
+
+INSERT INTO Olympic_staff VALUES (5,1,'Dmitry Ivan','Supervisor');
+INSERT INTO Olympic_staff VALUES (5,2,'Vladimir Trump','Electrician');
+INSERT INTO Olympic_staff VALUES (5,3,'Joe Bell','Doctor');
+INSERT INTO Olympic_staff VALUES (5,4,'Zendaya Maree','General');
+INSERT INTO Olympic_staff VALUES (5,5,'Tom Holland','Worker');
+--Next
