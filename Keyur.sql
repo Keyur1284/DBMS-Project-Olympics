@@ -127,8 +127,8 @@ CREATE TABLE Olympic_staff(
 );
 
 CREATE TABLE Print_languages(
-	PmID INT ,
 	CID INT ,
+	PmID INT ,
 	Print_language TEXT ,
 	PRIMARY KEY (CID,PmID,Print_language),
 	FOREIGN KEY (CID) REFERENCES Print_accessibility(CID) ,
@@ -136,8 +136,8 @@ CREATE TABLE Print_languages(
 );
 
 CREATE TABLE Electronic_languages(
-	EmID INT ,
 	CID INT ,
+	EmID INT ,
 	Electronic_language TEXT ,
 	PRIMARY KEY (CID,EmID,Electronic_language),
 	FOREIGN KEY (CID) REFERENCES Electronic_accessibility(CID) ,
@@ -257,65 +257,65 @@ CREATE TABLE Player(
 -- 11 to 15 -> weightlifting
 -- 16 to 25 -> track and field
 
-INSERT INTO Player VALUES (1,'F','Dhruvi Lad','23.69 s',170,50,1)
-INSERT INTO Player VALUES (2,'F','Rajata Chauhan','22.42 s',175,52,6)
-INSERT INTO Player VALUES (3,'F','Michel Sharma','24.71 s',169,55,7)
-INSERT INTO Player VALUES (4,'F','Rasika Patel','26.48 s',173,58,11)
-INSERT INTO Player VALUES (5,'F','Tulip Raj','27.32 s',166,53,3)
+INSERT INTO Player VALUES (1,'F','Dhruvi Lad','23.69 s',170,50,1);
+INSERT INTO Player VALUES (2,'F','Rajata Chauhan','22.42 s',175,52,6);
+INSERT INTO Player VALUES (3,'F','Michel Sharma','24.71 s',169,55,7);
+INSERT INTO Player VALUES (4,'F','Rasika Patel','26.48 s',173,58,11);
+INSERT INTO Player VALUES (5,'F','Tulip Raj','27.32 s',166,53,3);
 
-INSERT INTO Player VALUES (6,'F','Sakshi Lad','43.69 s',174,50,1)
-INSERT INTO Player VALUES (7,'F','Priya Chauhan','42.42 s',175,52,6)
-INSERT INTO Player VALUES (8,'F','Priyanshi Sharma','44.71 s',169,55,7)
-INSERT INTO Player VALUES (9,'F','Tarika Patel','46.48 s',173,58,11)
-INSERT INTO Player VALUES (10,'F','Tanisha Raj','47.32 s',167,53,3)
+INSERT INTO Player VALUES (6,'F','Sakshi Lad','43.69 s',174,50,1);
+INSERT INTO Player VALUES (7,'F','Priya Chauhan','42.42 s',175,52,6);
+INSERT INTO Player VALUES (8,'F','Priyanshi Sharma','44.71 s',169,55,7);
+INSERT INTO Player VALUES (9,'F','Tarika Patel','46.48 s',173,58,11);
+INSERT INTO Player VALUES (10,'F','Tanisha Raj','47.32 s',167,53,3);
 
-INSERT INTO Player VALUES (11,'M','Raj Tomar','10.22 s',180,59,14)
-INSERT INTO Player VALUES (12,'M','Rana Sharma','11.74 s',163,50,2)
-INSERT INTO Player VALUES (13,'M','Rajesh Kumar','13.12 s',175,55,4)
-INSERT INTO Player VALUES (14,'M','Tanish Tayal','10.65 s',175,65,6)
-INSERT INTO Player VALUES (15,'M','Tinku Patel','12.74 s',162,60,8)
+INSERT INTO Player VALUES (11,'M','Raj Tomar','10.22 s',180,59,14);
+INSERT INTO Player VALUES (12,'M','Rana Sharma','11.74 s',163,50,2);
+INSERT INTO Player VALUES (13,'M','Rajesh Kumar','13.12 s',175,55,4);
+INSERT INTO Player VALUES (14,'M','Tanish Tayal','10.65 s',175,65,6);
+INSERT INTO Player VALUES (15,'M','Tinku Patel','12.74 s',162,60,8);
 
-INSERT INTO Player VALUES (16,'M','Vihar Tomar','40.22 s',180,59,14)
-INSERT INTO Player VALUES (17,'M','Aryan Sharma','41.74 s',162,50,2)
-INSERT INTO Player VALUES (18,'M','Dev Kumar','43.12 s',175,55,4)
-INSERT INTO Player VALUES (19,'M','Darshan Tayal','40.65 s',175,65,6)
-INSERT INTO Player VALUES (20,'M','Jay Patel','42.74 s',162,60,8)
+INSERT INTO Player VALUES (16,'M','Vihar Tomar','40.22 s',180,59,14);
+INSERT INTO Player VALUES (17,'M','Aryan Sharma','41.74 s',162,50,2);
+INSERT INTO Player VALUES (18,'M','Dev Kumar','43.12 s',175,55,4);
+INSERT INTO Player VALUES (19,'M','Darshan Tayal','40.65 s',175,65,6);
+INSERT INTO Player VALUES (20,'M','Jay Patel','42.74 s',162,60,8);
 
-INSERT INTO Player VALUES (21,'M','Rajat Kumar','150 kg',175,55,15)
-INSERT INTO Player VALUES (22,'M','Yash Tayal','156 kg',180,65,2)
-INSERT INTO Player VALUES (23,'M','Bhavya Patel','155 kg',162,60,8)
-INSERT INTO Player VALUES (24,'M','Naman Kumar','153 kg',177,62,4)
-INSERT INTO Player VALUES (25,'M','Vedant Surti','159 kg',174,63,1)
+INSERT INTO Player VALUES (21,'M','Rajat Kumar','150 kg',175,55,15);
+INSERT INTO Player VALUES (22,'M','Yash Tayal','156 kg',180,65,2);
+INSERT INTO Player VALUES (23,'M','Bhavya Patel','155 kg',162,60,8);
+INSERT INTO Player VALUES (24,'M','Naman Kumar','153 kg',177,62,4);
+INSERT INTO Player VALUES (25,'M','Vedant Surti','159 kg',174,63,1);
 
-INSERT INTO Player VALUES (26,'M','Priyesh Kumar','167 kg',175,55,15)
-INSERT INTO Player VALUES (27,'M','Paresh Tayal','166 kg',180,65,2)
-INSERT INTO Player VALUES (28,'M','Jalp Parikh','168 kg',162,60,8)
-INSERT INTO Player VALUES (29,'M','Nishith Kumar','169 kg',177,62,4)
-INSERT INTO Player VALUES (30,'M','Sarvagna Surti','169 kg',174,63,1)
+INSERT INTO Player VALUES (26,'M','Priyesh Kumar','167 kg',175,55,15);
+INSERT INTO Player VALUES (27,'M','Paresh Tayal','166 kg',180,65,2);
+INSERT INTO Player VALUES (28,'M','Jalp Parikh','168 kg',162,60,8);
+INSERT INTO Player VALUES (29,'M','Nishith Kumar','169 kg',177,62,4);
+INSERT INTO Player VALUES (30,'M','Sarvagna Surti','169 kg',174,63,1);
 
-INSERT INTO Player VALUES (31,'F','Koyal Kumar','100 m',175,55,15)
-INSERT INTO Player VALUES (32,'F','Yashvi Doshi','99.76 m',180,65,2)
-INSERT INTO Player VALUES (33,'F','Sakshi Saraiya','98.44 m',162,60,8)
-INSERT INTO Player VALUES (34,'F','Chavi Sanghvi','98.23 m',177,62,4)
-INSERT INTO Player VALUES (35,'F','Kendell Jenner','96.52 m',174,63,1)
+INSERT INTO Player VALUES (31,'F','Koyal Kumar','100 m',175,55,15);
+INSERT INTO Player VALUES (32,'F','Yashvi Doshi','99.76 m',180,65,2);
+INSERT INTO Player VALUES (33,'F','Sakshi Saraiya','98.44 m',162,60,8);
+INSERT INTO Player VALUES (34,'F','Chavi Sanghvi','98.23 m',177,62,4);
+INSERT INTO Player VALUES (35,'F','Kendell Jenner','96.52 m',174,63,1);
 
-INSERT INTO Player VALUES (36,'F','Khushi Kumar','47.23 m',175,55,15)
-INSERT INTO Player VALUES (37,'F','Yashi Doshi','46.11 m',180,65,2)
-INSERT INTO Player VALUES (38,'F','Siya Saraiya','48.34 m',162,60,8)
-INSERT INTO Player VALUES (39,'F','Charu Sanghvi','48.66 m',177,62,4)
-INSERT INTO Player VALUES (40,'F','Disha Jenner','45.22 m',174,63,1)
+INSERT INTO Player VALUES (36,'F','Khushi Kumar','47.23 m',175,55,15);
+INSERT INTO Player VALUES (37,'F','Yashi Doshi','46.11 m',180,65,2);
+INSERT INTO Player VALUES (38,'F','Siya Saraiya','48.34 m',162,60,8);
+INSERT INTO Player VALUES (39,'F','Charu Sanghvi','48.66 m',177,62,4);
+INSERT INTO Player VALUES (40,'F','Disha Jenner','45.22 m',174,63,1);
 
-INSERT INTO Player VALUES (41,'M','Abhinav Arya','9.23 m',170,50,3)
-INSERT INTO Player VALUES (42,'M','Bhavesh Bhagat','10.43 m',162,55,5)
-INSERT INTO Player VALUES (43,'M','Vraj Goti','10.17 m',159,69,7)
-INSERT INTO Player VALUES (44,'M','Vasu Jogi','9.47 m',175,63,9)
-INSERT INTO Player VALUES (45,'M','Suyash Surti','10.35 m',173,57,10)
+INSERT INTO Player VALUES (41,'M','Abhinav Arya','9.23 m',170,50,3);
+INSERT INTO Player VALUES (42,'M','Bhavesh Bhagat','10.43 m',162,55,5);
+INSERT INTO Player VALUES (43,'M','Vraj Goti','10.17 m',159,69,7);
+INSERT INTO Player VALUES (44,'M','Vasu Jogi','9.47 m',175,63,9);
+INSERT INTO Player VALUES (45,'M','Suyash Surti','10.35 m',173,57,10);
 
-INSERT INTO Player VALUES (46,'M','Jayvir Arya','7.23 m',170,50,3)
-INSERT INTO Player VALUES (47,'M','Jigar Bhagat','8.43 m',162,55,5)
-INSERT INTO Player VALUES (48,'M','Divyam Goti','7.71 m',159,69,7)
-INSERT INTO Player VALUES (49,'M','Hardik Jogi','8.47 m',175,63,9)
-INSERT INTO Player VALUES (50,'M','Tipendra Surti','7.35 m',173,57,10)
+INSERT INTO Player VALUES (46,'M','Jayvir Arya','7.23 m',170,50,3);
+INSERT INTO Player VALUES (47,'M','Jigar Bhagat','8.43 m',162,55,5);
+INSERT INTO Player VALUES (48,'M','Divyam Goti','7.71 m',159,69,7);
+INSERT INTO Player VALUES (49,'M','Hardik Jogi','8.47 m',175,63,9);
+INSERT INTO Player VALUES (50,'M','Tipendra Surti','7.35 m',173,57,10);
 
 
 
