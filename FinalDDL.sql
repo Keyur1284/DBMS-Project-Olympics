@@ -89,8 +89,8 @@ CREATE TABLE Player_participation(
 );
 
 CREATE TABLE Electronic_accessibility(
-	CID INT UNIQUE ,
-	EmID INT UNIQUE ,
+	EmID INT  ,
+	CID INT  ,
 	Start_time TEXT,
 	PRIMARY KEY (CID,EmID),
 	FOREIGN KEY (CID) REFERENCES Country(CID) ,
@@ -98,9 +98,10 @@ CREATE TABLE Electronic_accessibility(
 );
 
 CREATE TABLE Print_accessibility(
-	CID INT UNIQUE,
-	PmID INT UNIQUE,
-	Publishing_date TEXT,
+	PmID INT ,
+	CID INT ,
+	Publishing_date_start TEXT,
+	Publishing_date_end TEXT,
 	PRIMARY KEY (CID,PmID),
 	FOREIGN KEY (CID) REFERENCES Country(CID) ,
 	FOREIGN KEY (PmID) REFERENCES Print_media(PmID) 
@@ -127,21 +128,21 @@ CREATE TABLE Olympic_staff(
 );
 
 CREATE TABLE Print_languages(
-	CID INT ,
 	PmID INT ,
+	CID INT ,
 	Print_language TEXT ,
 	PRIMARY KEY (CID,PmID,Print_language),
-	FOREIGN KEY (CID) REFERENCES Print_accessibility(CID) ,
-	FOREIGN KEY (PmID) REFERENCES Print_accessibility(PmID) 
+	FOREIGN KEY (CID,PmID) REFERENCES Print_accessibility(CID,PmID) 
+-- 	FOREIGN KEY (PmID) REFERENCES Print_accessibility(PmID) 
 );
 
 CREATE TABLE Electronic_languages(
-	CID INT ,
 	EmID INT ,
+	CID INT ,
 	Electronic_language TEXT ,
 	PRIMARY KEY (CID,EmID,Electronic_language),
-	FOREIGN KEY (CID) REFERENCES Electronic_accessibility(CID) ,
-	FOREIGN KEY (EmID) REFERENCES Electronic_accessibility(EmID) 
+	FOREIGN KEY (CID,EmID) REFERENCES Electronic_accessibility(CID,EmID) 
+-- 	FOREIGN KEY (EmID) REFERENCES Electronic_accessibility(EmID) 
 );
 
 -- INSERTING VALUES IN ALL TABLES
@@ -237,19 +238,6 @@ INSERT INTO Print_media VALUES (8,'The New York Post',100000);
 INSERT INTO Print_media VALUES (9,'Times of India',250000);
 INSERT INTO Print_media VALUES (10,'The Britain Times',100000);
 
-
-CREATE TABLE Player(
-	PID INT PRIMARY KEY,
-	Gender TEXT ,
-	Name TEXT,
-	Personal_best TEXT,
-	Age INT,
-	Height NUMERIC (5,2) ,
-	Weight NUMERIC (5,2) ,
-	CID INT ,
-	FOREIGN KEY (CID) REFERENCES Country(CID)
-);
-
 -- INSERTING IN PLAYER TABLE
 
 -- 1 to 5 -> swimming
@@ -317,44 +305,8 @@ INSERT INTO Player VALUES (48,'M','Divyam Goti','7.71 m',159,69,7);
 INSERT INTO Player VALUES (49,'M','Hardik Jogi','8.47 m',175,63,9);
 INSERT INTO Player VALUES (50,'M','Tipendra Surti','7.35 m',173,57,10);
 
--- Inserting print languages
+-- INSERTING IN ELECTRONIC_ACCESSIBILITY TABLE
 
-INSERT INTO Print_languages VALUES (9,1,'Hindi');
-INSERT INTO Print_languages VALUES (3,2,'English');
-INSERT INTO Print_languages VALUES (1,3,'English');
-INSERT INTO Print_languages VALUES (3,4,'Japanese');
-INSERT INTO Print_languages VALUES (4,5,'Chinese');
-INSERT INTO Print_languages VALUES (5,6,'Russian');
-INSERT INTO Print_languages VALUES (8,7,'German');
-INSERT INTO Print_languages VALUES (10,8,'French');
-INSERT INTO Print_languages VALUES (7,9,'Italian');
-INSERT INTO Print_languages VALUES (10,10,'English');
-INSERT INTO Print_languages VALUES (2,11,'English');
-INSERT INTO Print_languages VALUES (6,12,'English');
-INSERT INTO Print_languages VALUES (2,13,'English');
-INSERT INTO Print_languages VALUES (9,14,'Mexican');
-INSERT INTO Print_languages VALUES (2,15,'English');
---Next
-
---Inserting electronic languages
-INSERT INTO Electronic_languages VALUES (9,1,'Hindi');
-INSERT INTO Electronic_languages VALUES (3,2,'English');
-INSERT INTO Electronic_languages VALUES (1,3,'English');
-INSERT INTO Electronic_languages VALUES (3,4,'Japanese');
-INSERT INTO Electronic_languages VALUES (4,5,'Chinese');
-INSERT INTO Electronic_languages VALUES (5,6,'Russian');
-INSERT INTO Electronic_languages VALUES (8,7,'German');
-INSERT INTO Electronic_languages VALUES (10,8,'French');
-INSERT INTO Electronic_languages VALUES (7,9,'Italian');
-INSERT INTO Electronic_languages VALUES (10,10,'English');
-INSERT INTO Electronic_languages VALUES (2,11,'English');
-INSERT INTO Electronic_languages VALUES (6,12,'English');
-INSERT INTO Electronic_languages VALUES (2,13,'English');
-INSERT INTO Electronic_languages VALUES (9,14,'Mexican');
-INSERT INTO Electronic_languages VALUES (2,15,'English');
---Next
-
---Inserting in Electronic_accessibility
 INSERT INTO Electronic_accessibility VALUES (9,1,'14:30');
 INSERT INTO Electronic_accessibility VALUES (3,2,'4:00');
 INSERT INTO Electronic_accessibility VALUES (1,3,'19:00');
@@ -370,9 +322,27 @@ INSERT INTO Electronic_accessibility VALUES (6,12,'6:00');
 INSERT INTO Electronic_accessibility VALUES (2,13,'11:00');
 INSERT INTO Electronic_accessibility VALUES (9,14,'3:00');
 INSERT INTO Electronic_accessibility VALUES (2,15,'10:00');
---Next
 
---Inserting in Print_accessibility
+-- INSERTING IN ELECTRONIC_LANGUAGES TABLE
+
+INSERT INTO Electronic_languages VALUES (9,1,'Hindi');
+INSERT INTO Electronic_languages VALUES (3,2,'English');
+INSERT INTO Electronic_languages VALUES (1,3,'English');
+INSERT INTO Electronic_languages VALUES (3,4,'Japanese');
+INSERT INTO Electronic_languages VALUES (4,5,'Chinese');
+INSERT INTO Electronic_languages VALUES (5,6,'Russian');
+INSERT INTO Electronic_languages VALUES (8,7,'German');
+INSERT INTO Electronic_languages VALUES (10,8,'French');
+INSERT INTO Electronic_languages VALUES (7,9,'Italian');
+INSERT INTO Electronic_languages VALUES (10,10,'English');
+INSERT INTO Electronic_languages VALUES (2,11,'English');
+INSERT INTO Electronic_languages VALUES (6,12,'English');
+INSERT INTO Electronic_languages VALUES (2,13,'English');
+INSERT INTO Electronic_languages VALUES (9,14,'Mexican');
+INSERT INTO Electronic_languages VALUES (2,15,'English');
+
+-- INSERTING IN PRINT_ACCESSIBILITY TABLE
+
 INSERT INTO Print_accessibility VALUES (9,1,'16-03-2023', '19-03-2023');
 INSERT INTO Print_accessibility VALUES (3,2,'16-03-2023', '19-03-2023');
 INSERT INTO Print_accessibility VALUES (1,3,'16-03-2023', '19-03-2023');
@@ -389,8 +359,20 @@ INSERT INTO Print_accessibility VALUES (2,13,'16-03-2023', '19-03-2023');
 INSERT INTO Print_accessibility VALUES (9,14,'16-03-2023', '19-03-2023');
 INSERT INTO Print_accessibility VALUES (2,15,'16-03-2023', '19-03-2023');
 
+-- INSERTING IN PRINT_ACCESSIBILITY TABLE
 
-
-
-
-
+INSERT INTO Print_languages VALUES (9,1,'Hindi');
+INSERT INTO Print_languages VALUES (3,2,'English');
+INSERT INTO Print_languages VALUES (1,3,'English');
+INSERT INTO Print_languages VALUES (3,4,'Japanese');
+INSERT INTO Print_languages VALUES (4,5,'Chinese');
+INSERT INTO Print_languages VALUES (5,6,'Russian');
+INSERT INTO Print_languages VALUES (8,7,'German');
+INSERT INTO Print_languages VALUES (10,8,'French');
+INSERT INTO Print_languages VALUES (7,9,'Italian');
+INSERT INTO Print_languages VALUES (10,10,'English');
+INSERT INTO Print_languages VALUES (2,11,'English');
+INSERT INTO Print_languages VALUES (6,12,'English');
+INSERT INTO Print_languages VALUES (2,13,'English');
+INSERT INTO Print_languages VALUES (9,14,'Mexican');
+INSERT INTO Print_languages VALUES (2,15,'English');
