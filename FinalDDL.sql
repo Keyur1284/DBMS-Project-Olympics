@@ -317,6 +317,78 @@ INSERT INTO Player VALUES (48,'M','Divyam Goti','7.71 m',159,69,7);
 INSERT INTO Player VALUES (49,'M','Hardik Jogi','8.47 m',175,63,9);
 INSERT INTO Player VALUES (50,'M','Tipendra Surti','7.35 m',173,57,10);
 
+-- Inserting print languages
+
+INSERT INTO Print_languages VALUES (9,1,'Hindi');
+INSERT INTO Print_languages VALUES (3,2,'English');
+INSERT INTO Print_languages VALUES (1,3,'English');
+INSERT INTO Print_languages VALUES (3,4,'Japanese');
+INSERT INTO Print_languages VALUES (4,5,'Chinese');
+INSERT INTO Print_languages VALUES (5,6,'Russian');
+INSERT INTO Print_languages VALUES (8,7,'German');
+INSERT INTO Print_languages VALUES (10,8,'French');
+INSERT INTO Print_languages VALUES (7,9,'Italian');
+INSERT INTO Print_languages VALUES (10,10,'English');
+INSERT INTO Print_languages VALUES (2,11,'English');
+INSERT INTO Print_languages VALUES (6,12,'English');
+INSERT INTO Print_languages VALUES (2,13,'English');
+INSERT INTO Print_languages VALUES (9,14,'Mexican');
+INSERT INTO Print_languages VALUES (2,15,'English');
+--Next
+
+--Inserting electronic languages
+INSERT INTO Electronic_languages VALUES (9,1,'Hindi');
+INSERT INTO Electronic_languages VALUES (3,2,'English');
+INSERT INTO Electronic_languages VALUES (1,3,'English');
+INSERT INTO Electronic_languages VALUES (3,4,'Japanese');
+INSERT INTO Electronic_languages VALUES (4,5,'Chinese');
+INSERT INTO Electronic_languages VALUES (5,6,'Russian');
+INSERT INTO Electronic_languages VALUES (8,7,'German');
+INSERT INTO Electronic_languages VALUES (10,8,'French');
+INSERT INTO Electronic_languages VALUES (7,9,'Italian');
+INSERT INTO Electronic_languages VALUES (10,10,'English');
+INSERT INTO Electronic_languages VALUES (2,11,'English');
+INSERT INTO Electronic_languages VALUES (6,12,'English');
+INSERT INTO Electronic_languages VALUES (2,13,'English');
+INSERT INTO Electronic_languages VALUES (9,14,'Mexican');
+INSERT INTO Electronic_languages VALUES (2,15,'English');
+--Next
+
+--Inserting in Electronic_accessibility
+INSERT INTO Electronic_accessibility VALUES (9,1,'14:30');
+INSERT INTO Electronic_accessibility VALUES (3,2,'4:00');
+INSERT INTO Electronic_accessibility VALUES (1,3,'19:00');
+INSERT INTO Electronic_accessibility VALUES (3,4,'18:00');
+INSERT INTO Electronic_accessibility VALUES (4,5,'17:00');
+INSERT INTO Electronic_accessibility VALUES (5,6,'12:00');
+INSERT INTO Electronic_accessibility VALUES (8,7,'10:00');
+INSERT INTO Electronic_accessibility VALUES (10,8,'10:00');
+INSERT INTO Electronic_accessibility VALUES (7,9,'10:00');
+INSERT INTO Electronic_accessibility VALUES (10,10,'10:00');
+INSERT INTO Electronic_accessibility VALUES (2,11,'4:00');
+INSERT INTO Electronic_accessibility VALUES (6,12,'6:00');
+INSERT INTO Electronic_accessibility VALUES (2,13,'11:00');
+INSERT INTO Electronic_accessibility VALUES (9,14,'3:00');
+INSERT INTO Electronic_accessibility VALUES (2,15,'10:00');
+--Next
+
+--Inserting in Print_accessibility
+INSERT INTO Print_accessibility VALUES (9,1,'16-03-2023', '19-03-2023');
+INSERT INTO Print_accessibility VALUES (3,2,'16-03-2023', '19-03-2023');
+INSERT INTO Print_accessibility VALUES (1,3,'16-03-2023', '19-03-2023');
+INSERT INTO Print_accessibility VALUES (3,4,'16-03-2023', '19-03-2023');
+INSERT INTO Print_accessibility VALUES (4,5,'16-03-2023', '19-03-2023');
+INSERT INTO Print_accessibility VALUES (5,6,'16-03-2023', '19-03-2023');
+INSERT INTO Print_accessibility VALUES (8,7,'16-03-2023', '19-03-2023');
+INSERT INTO Print_accessibility VALUES (10,8,'16-03-2023', '19-03-2023');
+INSERT INTO Print_accessibility VALUES (7,9,'16-03-2023', '19-03-2023');
+INSERT INTO Print_accessibility VALUES (10,10,'16-03-2023', '19-03-2023');
+INSERT INTO Print_accessibility VALUES (2,11,'16-03-2023', '19-03-2023');
+INSERT INTO Print_accessibility VALUES (6,12,'16-03-2023', '19-03-2023');
+INSERT INTO Print_accessibility VALUES (2,13,'16-03-2023', '19-03-2023');
+INSERT INTO Print_accessibility VALUES (9,14,'16-03-2023', '19-03-2023');
+INSERT INTO Print_accessibility VALUES (2,15,'16-03-2023', '19-03-2023');
+
 
 
 
