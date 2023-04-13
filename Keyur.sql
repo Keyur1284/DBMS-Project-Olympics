@@ -8,11 +8,9 @@ CREATE TABLE Brands(
 	Endorsed_money INT
 );
 
-CREATE TABLE Medical(
-	MID INT,
-	Test_name TEXT ,
-	Test_result TEXT,
-	PRIMARY KEY (MID,Test_name)
+CREATE TABLE Medical_test(
+	MID INT PRIMARY KEY,
+	Test_name TEXT
 );
 
 CREATE TABLE Events(
@@ -50,95 +48,101 @@ CREATE TABLE Print_media(
 	Copies_sold INT 
 );
 
--- CREATE TABLE Player(
--- 	PID INT PRIMARY KEY,
--- 	Gender TEXT ,
--- 	Name TEXT,
--- 	Personal_best TEXT,
--- 	Age INT,
--- 	MID INT,
--- 	Height NUMERIC (5,2) ,
--- 	Weight NUMERIC (5,2) ,
--- 	CID INT ,
--- 	FOREIGN KEY (MID) REFERENCES Medical(MID),
--- 	FOREIGN KEY (CID) REFERENCES Country(CID)
--- );
+CREATE TABLE Player(
+	PID INT PRIMARY KEY,
+	Gender TEXT ,
+	Name TEXT,
+	Personal_best TEXT,
+	Age INT,
+	Height NUMERIC (5,2) ,
+	Weight NUMERIC (5,2) ,
+	CID INT ,
+	FOREIGN KEY (CID) REFERENCES Country(CID)
+);
 
+CREATE TABLE Fitness_checkup(
+	PID INT ,
+	MID INT ,
+	Result TEXT,
+	PRIMARY KEY (PID,MID),
+	FOREIGN KEY (PID) REFERENCES Player(PID) ,
+	FOREIGN KEY (MID) REFERENCES Medical_test(MID) 
+);
 
--- CREATE TABLE Player_association(
--- 	PID INT ,
--- 	BID INT ,
--- 	Tenure INT,
--- 	PRIMARY KEY (PID,BID),
--- 	FOREIGN KEY (PID) REFERENCES Player(PID) ,
--- 	FOREIGN KEY (BID) REFERENCES Brands(BID) 
--- );
+CREATE TABLE Player_association(
+	PID INT ,
+	BID INT ,
+	Tenure INT,
+	PRIMARY KEY (PID,BID),
+	FOREIGN KEY (PID) REFERENCES Player(PID) ,
+	FOREIGN KEY (BID) REFERENCES Brands(BID) 
+);
 
--- CREATE TABLE Player_participation(
--- 	PID INT ,
--- 	EvID INT ,
--- 	Year INT,
--- 	Result NUMERIC (6,2),
--- 	PRIMARY KEY (PID,EvID),
--- 	FOREIGN KEY (PID) REFERENCES Player(PID) ,
--- 	FOREIGN KEY (EvID) REFERENCES Events(EvID) 
--- );
+CREATE TABLE Player_participation(
+	PID INT ,
+	EvID INT ,
+	Year INT,
+	Result NUMERIC (6,2),
+	PRIMARY KEY (PID,EvID),
+	FOREIGN KEY (PID) REFERENCES Player(PID) ,
+	FOREIGN KEY (EvID) REFERENCES Events(EvID) 
+);
 
--- CREATE TABLE Electronic_accessibility(
--- 	CID INT UNIQUE ,
--- 	EmID INT UNIQUE ,
--- 	Start_time TEXT,
--- 	PRIMARY KEY (CID,EmID),
--- 	FOREIGN KEY (CID) REFERENCES Country(CID) ,
--- 	FOREIGN KEY (EmID) REFERENCES Electronic_media(EmID) 
--- );
+CREATE TABLE Electronic_accessibility(
+	CID INT UNIQUE ,
+	EmID INT UNIQUE ,
+	Start_time TEXT,
+	PRIMARY KEY (CID,EmID),
+	FOREIGN KEY (CID) REFERENCES Country(CID) ,
+	FOREIGN KEY (EmID) REFERENCES Electronic_media(EmID) 
+);
 
--- CREATE TABLE Print_accessibility(
--- 	CID INT UNIQUE,
--- 	PmID INT UNIQUE,
--- 	Publishing_date TEXT,
--- 	PRIMARY KEY (CID,PmID),
--- 	FOREIGN KEY (CID) REFERENCES Country(CID) ,
--- 	FOREIGN KEY (PmID) REFERENCES Print_media(PmID) 
--- );
+CREATE TABLE Print_accessibility(
+	CID INT UNIQUE,
+	PmID INT UNIQUE,
+	Publishing_date TEXT,
+	PRIMARY KEY (CID,PmID),
+	FOREIGN KEY (CID) REFERENCES Country(CID) ,
+	FOREIGN KEY (PmID) REFERENCES Print_media(PmID) 
+);
 
--- CREATE TABLE Olympic_host(
--- 	CID INT ,
--- 	Year INT ,
--- 	No_of_participants INT,
--- 	No_of_stadium INT,
--- 	Rating Numeric (3,2) ,
--- 	WID INT ,
--- 	PRIMARY KEY (CID,Year),
--- 	FOREIGN KEY (CID) REFERENCES Country(CID) ,
--- 	FOREIGN KEY (WID) REFERENCES Weather_Condition(WID) 
--- );
+CREATE TABLE Olympic_host(
+	CID INT ,
+	Year INT ,
+	No_of_participants INT,
+	No_of_stadium INT,
+	Rating Numeric (3,2) ,
+	WID INT ,
+	PRIMARY KEY (CID,Year),
+	FOREIGN KEY (CID) REFERENCES Country(CID) ,
+	FOREIGN KEY (WID) REFERENCES Weather_Condition(WID) 
+);
 
--- CREATE TABLE Olympic_staff(
--- 	CID INT ,
--- 	StID INT PRIMARY KEY,
--- 	Staff_name TEXT,
--- 	Duty TEXT,
--- 	FOREIGN KEY (CID) REFERENCES Country(CID)  
--- );
+CREATE TABLE Olympic_staff(
+	CID INT ,
+	StID INT PRIMARY KEY,
+	Staff_name TEXT,
+	Duty TEXT,
+	FOREIGN KEY (CID) REFERENCES Country(CID)  
+);
 
--- CREATE TABLE Print_languages(
--- 	PmID INT ,
--- 	CID INT ,
--- 	Print_language TEXT ,
--- 	PRIMARY KEY (CID,PmID,Print_language),
--- 	FOREIGN KEY (CID) REFERENCES Print_accessibility(CID) ,
--- 	FOREIGN KEY (PmID) REFERENCES Print_accessibility(PmID) 
--- );
+CREATE TABLE Print_languages(
+	PmID INT ,
+	CID INT ,
+	Print_language TEXT ,
+	PRIMARY KEY (CID,PmID,Print_language),
+	FOREIGN KEY (CID) REFERENCES Print_accessibility(CID) ,
+	FOREIGN KEY (PmID) REFERENCES Print_accessibility(PmID) 
+);
 
--- CREATE TABLE Electronic_languages(
--- 	EmID INT ,
--- 	CID INT ,
--- 	Electronic_language TEXT ,
--- 	PRIMARY KEY (CID,EmID,Electronic_language),
--- 	FOREIGN KEY (CID) REFERENCES Electronic_accessibility(CID) ,
--- 	FOREIGN KEY (EmID) REFERENCES Electronic_accessibility(EmID) 
--- );
+CREATE TABLE Electronic_languages(
+	EmID INT ,
+	CID INT ,
+	Electronic_language TEXT ,
+	PRIMARY KEY (CID,EmID,Electronic_language),
+	FOREIGN KEY (CID) REFERENCES Electronic_accessibility(CID) ,
+	FOREIGN KEY (EmID) REFERENCES Electronic_accessibility(EmID) 
+);
 
 -- INSERTING VALUES IN ALL TABLES
 
@@ -160,157 +164,10 @@ INSERT INTO Brands VALUES (13,'Nissan',2000000);
 INSERT INTO Brands VALUES (14,'Tata',3000000);
 INSERT INTO Brands VALUES (15,'Kingfisher',4000000);
 
--- INSERTING IN MEDICAL TABLE
+-- INSERTING IN MEDICAL_TEST TABLE
 
-INSERT INTO Medical VALUES (1,'Dopamine','Negative');
-INSERT INTO Medical VALUES (1,'ECG','Normal');
-
-INSERT INTO Medical VALUES (2,'Dopamine','Negative');
-INSERT INTO Medical VALUES (2,'ECG','Normal');
-
-INSERT INTO Medical VALUES (3,'Dopamine','Negative');
-INSERT INTO Medical VALUES (3,'ECG','Normal');
-
-INSERT INTO Medical VALUES (4,'Dopamine','Negative');
-INSERT INTO Medical VALUES (4,'ECG','Normal');
-
-INSERT INTO Medical VALUES (5,'Dopamine','Negative');
-INSERT INTO Medical VALUES (5,'ECG','Normal');
-
-INSERT INTO Medical VALUES (6,'Dopamine','Positive');
-INSERT INTO Medical VALUES (6,'ECG','Normal');
-
-INSERT INTO Medical VALUES (7,'Dopamine','Negative');
-INSERT INTO Medical VALUES (7,'ECG','Normal');
-
-INSERT INTO Medical VALUES (8,'Dopamine','Negative');
-INSERT INTO Medical VALUES (8,'ECG','Normal');
-
-INSERT INTO Medical VALUES (9,'Dopamine','Negative');
-INSERT INTO Medical VALUES (9,'ECG','Normal');
-
-INSERT INTO Medical VALUES (10,'Dopamine','Negative');
-INSERT INTO Medical VALUES (10,'ECG','Normal');
-
-INSERT INTO Medical VALUES (11,'Dopamine','Negative');
-INSERT INTO Medical VALUES (11,'ECG','Abnormal');
-
-INSERT INTO Medical VALUES (12,'Dopamine','Negative');
-INSERT INTO Medical VALUES (12,'ECG','Normal');
-
-INSERT INTO Medical VALUES (13,'Dopamine','Negative');
-INSERT INTO Medical VALUES (13,'ECG','Normal');
-
-INSERT INTO Medical VALUES (14,'Dopamine','Negative');
-INSERT INTO Medical VALUES (14,'ECG','Normal');
-
-INSERT INTO Medical VALUES (15,'Dopamine','Negative');
-INSERT INTO Medical VALUES (15,'ECG','Normal');
-
-INSERT INTO Medical VALUES (16,'Dopamine','Negative');
-INSERT INTO Medical VALUES (16,'ECG','Normal');
-
-INSERT INTO Medical VALUES (17,'Dopamine','Negative');
-INSERT INTO Medical VALUES (17,'ECG','Normal');
-
-INSERT INTO Medical VALUES (18,'Dopamine','Negative');
-INSERT INTO Medical VALUES (18,'ECG','Normal');
-
-INSERT INTO Medical VALUES (19,'Dopamine','Negative');
-INSERT INTO Medical VALUES (19,'ECG','Normal');
-
-INSERT INTO Medical VALUES (20,'Dopamine','Negative');
-INSERT INTO Medical VALUES (20,'ECG','Normal');
-
-INSERT INTO Medical VALUES (21,'Dopamine','Negative');
-INSERT INTO Medical VALUES (21,'ECG','Normal');
-
-INSERT INTO Medical VALUES (22,'Dopamine','Negative');
-INSERT INTO Medical VALUES (22,'ECG','Normal');
-
-INSERT INTO Medical VALUES (23,'Dopamine','Negative');
-INSERT INTO Medical VALUES (23,'ECG','Normal');
-
-INSERT INTO Medical VALUES (24,'Dopamine','Negative');
-INSERT INTO Medical VALUES (24,'ECG','Normal');
-
-INSERT INTO Medical VALUES (25,'Dopamine','Negative');
-INSERT INTO Medical VALUES (25,'ECG','Normal');
-
-INSERT INTO Medical VALUES (26,'Dopamine','Negative');
-INSERT INTO Medical VALUES (26,'ECG','Normal');
-
-INSERT INTO Medical VALUES (27,'Dopamine','Negative');
-INSERT INTO Medical VALUES (27,'ECG','Normal');
-
-INSERT INTO Medical VALUES (28,'Dopamine','Negative');
-INSERT INTO Medical VALUES (28,'ECG','Normal');
-
-INSERT INTO Medical VALUES (29,'Dopamine','Negative');
-INSERT INTO Medical VALUES (29,'ECG','Normal');
-
-INSERT INTO Medical VALUES (30,'Dopamine','Negative');
-INSERT INTO Medical VALUES (30,'ECG','Normal');
-
-INSERT INTO Medical VALUES (31,'Dopamine','Negative');
-INSERT INTO Medical VALUES (31,'ECG','Normal');
-
-INSERT INTO Medical VALUES (32,'Dopamine','Negative');
-INSERT INTO Medical VALUES (32,'ECG','Normal');
-
-INSERT INTO Medical VALUES (33,'Dopamine','Negative');
-INSERT INTO Medical VALUES (33,'ECG','Normal');
-
-INSERT INTO Medical VALUES (34,'Dopamine','Negative');
-INSERT INTO Medical VALUES (34,'ECG','Normal');
-
-INSERT INTO Medical VALUES (35,'Dopamine','Negative');
-INSERT INTO Medical VALUES (35,'ECG','Normal');
-
-INSERT INTO Medical VALUES (36,'Dopamine','Negative');
-INSERT INTO Medical VALUES (36,'ECG','Normal');
-
-INSERT INTO Medical VALUES (37,'Dopamine','Negative');
-INSERT INTO Medical VALUES (37,'ECG','Normal');
-
-INSERT INTO Medical VALUES (38,'Dopamine','Negative');
-INSERT INTO Medical VALUES (38,'ECG','Normal');
-
-INSERT INTO Medical VALUES (39,'Dopamine','Negative');
-INSERT INTO Medical VALUES (39,'ECG','Normal');
-
-INSERT INTO Medical VALUES (40,'Dopamine','Negative');
-INSERT INTO Medical VALUES (40,'ECG','Normal');
-
-INSERT INTO Medical VALUES (41,'Dopamine','Negative');
-INSERT INTO Medical VALUES (41,'ECG','Normal');
-
-INSERT INTO Medical VALUES (42,'Dopamine','Negative');
-INSERT INTO Medical VALUES (42,'ECG','Normal');
-
-INSERT INTO Medical VALUES (43,'Dopamine','Negative');
-INSERT INTO Medical VALUES (43,'ECG','Normal');
-
-INSERT INTO Medical VALUES (44,'Dopamine','Negative');
-INSERT INTO Medical VALUES (44,'ECG','Normal');
-
-INSERT INTO Medical VALUES (45,'Dopamine','Negative');
-INSERT INTO Medical VALUES (45,'ECG','Normal');
-
-INSERT INTO Medical VALUES (46,'Dopamine','Negative');
-INSERT INTO Medical VALUES (46,'ECG','Normal');
-
-INSERT INTO Medical VALUES (47,'Dopamine','Negative');
-INSERT INTO Medical VALUES (47,'ECG','Normal');
-
-INSERT INTO Medical VALUES (48,'Dopamine','Negative');
-INSERT INTO Medical VALUES (48,'ECG','Normal');
-
-INSERT INTO Medical VALUES (49,'Dopamine','Negative');
-INSERT INTO Medical VALUES (49,'ECG','Normal');
-
-INSERT INTO Medical VALUES (50,'Dopamine','Negative');
-INSERT INTO Medical VALUES (50,'ECG','Normal');
+INSERT INTO Medical_test VALUES (1,'Dopamine');
+INSERT INTO Medical_test VALUES (2,'ECG');
 
 -- INSERTING IN EVENTS TABLE
 
