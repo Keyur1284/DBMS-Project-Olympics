@@ -24,7 +24,7 @@ CREATE TABLE Events(
 
 CREATE TABLE Weather_condition(
 	WID INT PRIMARY KEY,
-	Temperature TEXT ,
+	Temperature_C INT ,
 	Air_quality TEXT ,
 	Humidity NUMERIC (4,2) ,
 	Wind_speed INT 
@@ -186,11 +186,11 @@ INSERT INTO Events VALUES (10,'Pole Vault','Track and Field','7.12 m','6.03 m');
 
 -- INSERTING IN WEATHER_CONDITION TABLE
 
-INSERT INTO Weather_condition VALUES (1,'30 C','Good',5.23,10);
-INSERT INTO Weather_condition VALUES (2,'24 C','Good',20.42,15);
-INSERT INTO Weather_condition VALUES (3,'27 C','Moderate',15.78,12);
-INSERT INTO Weather_condition VALUES (4,'32 C','Good',28.34,18);
-INSERT INTO Weather_condition VALUES (5,'35 C','Moderate',14.62,9);
+INSERT INTO Weather_condition VALUES (1,'30','Good',5.23,10);
+INSERT INTO Weather_condition VALUES (2,'24','Good',20.42,15);
+INSERT INTO Weather_condition VALUES (3,'27','Moderate',15.78,12);
+INSERT INTO Weather_condition VALUES (4,'32','Good',28.34,18);
+INSERT INTO Weather_condition VALUES (5,'35','Moderate',14.62,9);
 
 -- INSERTING IN COUNTRY TABLE
 
@@ -606,7 +606,7 @@ INSERT INTO Olympic_staff VALUES (5,25,'Tom Holland','Worker');
 SELECT * FROM Brands;
 SELECT * FROM Medical_test;
 SELECT * FROM Events;
-SELECT * FROM Weather_Condition;
+SELECT * FROM Weather_condition;
 SELECT * FROM Country;
 SELECT * FROM Electronic_media;
 SELECT * FROM Print_media;
@@ -621,3 +621,38 @@ SELECT * FROM Olympic_host;
 SELECT * FROM Olympic_staff;
 SELECT * FROM Fitness_checkup;
 
+-- 1. List top 3 nations with the highest overall rating
+
+SELECT country_name, rating FROM 
+Country NATURAL JOIN Olympic_host
+ORDER BY rating DESC
+LIMIT 3;
+
+-- 2.  Give the count of players participating in olympics from different nations.
+
+SELECT country_name, COUNT(pid) AS no_of_players FROM
+Player NATURAL JOIN Country
+GROUP BY cid, country_name;
+
+-- 3. Give the count of players associated with Jalal brand
+
+SELECT brand_name, COUNT(pid) AS total_players FROM
+Player_association NATURAL JOIN Brands
+WHERE brand_name = 'Jalal'
+GROUP BY bid, brand_name;
+
+--4. List the current world record and player's personal best for Javelin in Track and Field 
+-- sports category with player name in increasing age 
+
+SELECT Name, Age, Personal_best, World_record FROM 
+Events NATURAL JOIN Player_participation 
+NATURAL JOIN Player
+WHERE Sport_name='Track and Field' AND  Event_name='Javelin'
+ORDER BY Player.Age; 
+
+--5. Get the countries whose weather condititon is temperature < 32 and wind speed > 10 during olympics
+
+SELECT Country_name, Temperature_C, Wind_speed FROM
+Country NATURAL JOIN Olympic_host
+NATURAL JOIN Weather_condition
+WHERE (Temperature_C < 32 AND Wind_speed > 10);

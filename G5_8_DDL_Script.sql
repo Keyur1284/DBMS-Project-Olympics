@@ -1,4 +1,3 @@
-DROP SCHEMA Olympidb CASCADE;
 CREATE SCHEMA Olympidb;
 SET SEARCH_PATH TO Olympidb;
 
@@ -23,7 +22,7 @@ CREATE TABLE Events(
 
 CREATE TABLE Weather_condition(
 	WID INT PRIMARY KEY,
-	Temperature_C INT ,
+	Temperature TEXT ,
 	Air_quality TEXT ,
 	Humidity NUMERIC (4,2) ,
 	Wind_speed INT 
@@ -185,11 +184,11 @@ INSERT INTO Events VALUES (10,'Pole Vault','Track and Field','7.12 m','6.03 m');
 
 -- INSERTING IN WEATHER_CONDITION TABLE
 
-INSERT INTO Weather_condition VALUES (1,'30','Good',5.23,10);
-INSERT INTO Weather_condition VALUES (2,'24','Good',20.42,15);
-INSERT INTO Weather_condition VALUES (3,'27','Moderate',15.78,12);
-INSERT INTO Weather_condition VALUES (4,'32','Good',28.34,18);
-INSERT INTO Weather_condition VALUES (5,'35','Moderate',14.62,9);
+INSERT INTO Weather_condition VALUES (1,'30 C','Good',5.23,10);
+INSERT INTO Weather_condition VALUES (2,'24 C','Good',20.42,15);
+INSERT INTO Weather_condition VALUES (3,'27 C','Moderate',15.78,12);
+INSERT INTO Weather_condition VALUES (4,'32 C','Good',28.34,18);
+INSERT INTO Weather_condition VALUES (5,'35 C','Moderate',14.62,9);
 
 -- INSERTING IN COUNTRY TABLE
 
@@ -236,11 +235,6 @@ INSERT INTO Print_media VALUES (9,'Times of India',250000);
 INSERT INTO Print_media VALUES (10,'The Britain Times',100000);
 
 -- INSERTING IN PLAYER TABLE
-
--- 1 to 5 -> swimming
--- 6 to 10 -> sprint
--- 11 to 15 -> weightlifting
--- 16 to 25 -> track and field
 
 INSERT INTO Player VALUES (1,'F','Dhruvi Lad','23.69 s',23,170,50,1);
 INSERT INTO Player VALUES (2,'F','Rajata Chauhan','22.42 s',20,175,52,6);
@@ -601,57 +595,3 @@ INSERT INTO Olympic_staff VALUES (5,22,'Vladimir Trump','Electrician');
 INSERT INTO Olympic_staff VALUES (5,23,'Joe Bell','Doctor');
 INSERT INTO Olympic_staff VALUES (5,24,'Zendaya Maree','General');
 INSERT INTO Olympic_staff VALUES (5,25,'Tom Holland','Worker');
-
-SELECT * FROM Brands;
-SELECT * FROM Medical_test;
-SELECT * FROM Events;
-SELECT * FROM Weather_Condition;
-SELECT * FROM Country;
-SELECT * FROM Electronic_media;
-SELECT * FROM Print_media;
-SELECT * FROM Player;
-SELECT * FROM Electronic_accessibility;
-SELECT * FROM Print_accessibility;
-SELECT * FROM Electronic_languages;
-SELECT * FROM Print_languages;
-SELECT * FROM Player_participation;
-SELECT * FROM Player_association;
-SELECT * FROM Olympic_host;
-SELECT * FROM Olympic_staff;
-SELECT * FROM Fitness_checkup;
-
--- 1. List top 3 nations with the highest overall rating
-
-SELECT cid, country_name, rating FROM 
-Country NATURAL JOIN Olympic_host
-ORDER BY rating DESC
-LIMIT 3;
-
--- 2.  Give the count of players participating in olympics from different nations.
-
-SELECT cid, country_name, COUNT(pid) AS no_of_players FROM
-Player NATURAL JOIN Country
-GROUP BY cid, country_name;
-
--- 3. Give the count of players associated with Jalal brand
-
-SELECT bid, brand_name, COUNT(pid) AS total_players FROM
-Player_association NATURAL JOIN Brands
-WHERE brand_name = 'Jalal'
-GROUP BY bid, brand_name;
-
---4. List the current sports world recordfor Track and field with player name in increasing age.
-SELECT Sport_name,Name,Age,Personal_best,World_record 
-FROM Events 
-NATURAL JOIN Player_participation 
-NATURAL JOIN Player
-WHERE Sport_name='Track and Field' 
-ORDER BY Player.Age ASC; 
-
---5. Get the Countries whose  weather condititon is temperature <32 and wind speed >10 during olympics
-
-SELECT Country_name,Temperature_C as Temperature ,Wind_speed
-FROM Country
-NATURAL JOIN Olympic_host
-NATURAL JOIN Weather_condition
-WHERE (Temperature_C < 32 and Wind_speed >10);
