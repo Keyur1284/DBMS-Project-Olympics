@@ -619,3 +619,23 @@ SELECT * FROM Player_association;
 SELECT * FROM Olympic_host;
 SELECT * FROM Olympic_staff;
 SELECT * FROM Fitness_checkup;
+
+-- 1. List top 3 nations with the highest overall rating
+
+SELECT cid, country_name, rating FROM 
+Country NATURAL JOIN Olympic_host
+ORDER BY rating DESC
+LIMIT 3;
+
+-- 2.  List numbers of players participating in olympics from different nations.
+
+SELECT cid, country_name, COUNT(pid) AS no_of_players FROM
+Player NATURAL JOIN Country
+GROUP BY cid, country_name;
+
+-- 3. List the number of players associated with Jalal brand
+
+SELECT bid, brand_name, COUNT(pid) AS total_players FROM
+Player_association NATURAL JOIN Brands
+WHERE brand_name = 'Jalal'
+GROUP BY bid, brand_name;
