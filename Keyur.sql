@@ -39,7 +39,7 @@ CREATE TABLE Country(
 CREATE TABLE Electronic_media(
 	EmID INT PRIMARY KEY,
 	Electronic_name TEXT ,
-	Streaming_duration TEXT 
+	Streaming_duration_hrs INT 
 );
 
 CREATE TABLE Print_media(
@@ -211,16 +211,17 @@ INSERT INTO Country VALUES (15,'Netherlands','Europe','UTC +1:00');
 
 -- INSERTING IN Electronic_media TABLE
 
-INSERT INTO Electronic_media VALUES (1,'TV','8 hours');
-INSERT INTO Electronic_media VALUES (2,'Radio','6 hours');
-INSERT INTO Electronic_media VALUES (3,'Internet','12 hours');
-INSERT INTO Electronic_media VALUES (4,'DVD','7 hours');
-INSERT INTO Electronic_media VALUES (5,'CD','6 hours');
-INSERT INTO Electronic_media VALUES (6,'Blu-ray','7 hours');
-INSERT INTO Electronic_media VALUES (7,'VHS','6 hours');
-INSERT INTO Electronic_media VALUES (8,'HDTV','8 hours');
-INSERT INTO Electronic_media VALUES (9,'Laserdisc','4 hours');
-INSERT INTO Electronic_media VALUES (10,'Ultraviolet','2 hours');
+INSERT INTO Electronic_media VALUES (1,'TV',8);
+INSERT INTO Electronic_media VALUES (2,'Radio',6);
+INSERT INTO Electronic_media VALUES (3,'Internet',12);
+INSERT INTO Electronic_media VALUES (4,'DVD',7);
+INSERT INTO Electronic_media VALUES (5,'CD',6);
+INSERT INTO Electronic_media VALUES (6,'Blu-ray',7);
+INSERT INTO Electronic_media VALUES (7,'VHS',6);
+INSERT INTO Electronic_media VALUES (8,'HDTV',8);
+INSERT INTO Electronic_media VALUES (9,'Laserdisc',4);
+INSERT INTO Electronic_media VALUES (10,'Ultraviolet',2);
+
 
 -- INSERTING IN Print_media TABLE
 
