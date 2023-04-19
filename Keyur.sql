@@ -605,7 +605,7 @@ INSERT INTO Olympic_staff VALUES (5,25,'Tom Holland','Worker');
 SELECT * FROM Brands;
 SELECT * FROM Medical_test;
 SELECT * FROM Events;
-SELECT * FROM Weather_Condition;
+SELECT * FROM Weather_condition;
 SELECT * FROM Country;
 SELECT * FROM Electronic_media;
 SELECT * FROM Print_media;
@@ -622,20 +622,20 @@ SELECT * FROM Fitness_checkup;
 
 -- 1. List top 3 nations with the highest overall rating
 
-SELECT cid, country_name, rating FROM 
+SELECT country_name, rating FROM 
 Country NATURAL JOIN Olympic_host
 ORDER BY rating DESC
 LIMIT 3;
 
 -- 2.  Give the count of players participating in olympics from different nations.
 
-SELECT cid, country_name, COUNT(pid) AS no_of_players FROM
+SELECT country_name, COUNT(pid) AS no_of_players FROM
 Player NATURAL JOIN Country
 GROUP BY cid, country_name;
 
 -- 3. Give the count of players associated with Jalal brand
 
-SELECT bid, brand_name, COUNT(pid) AS total_players FROM
+SELECT brand_name, COUNT(pid) AS total_players FROM
 Player_association NATURAL JOIN Brands
 WHERE brand_name = 'Jalal'
 GROUP BY bid, brand_name;
