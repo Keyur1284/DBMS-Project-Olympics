@@ -39,7 +39,7 @@ CREATE TABLE Country(
 CREATE TABLE Electronic_media(
 	EmID INT PRIMARY KEY,
 	Electronic_name TEXT ,
-	Streaming_duration TEXT 
+	Streaming_duration_hrs INT 
 );
 
 CREATE TABLE Print_media(
@@ -211,16 +211,17 @@ INSERT INTO Country VALUES (15,'Netherlands','Europe','UTC +1:00');
 
 -- INSERTING IN Electronic_media TABLE
 
-INSERT INTO Electronic_media VALUES (1,'TV','8 hours');
-INSERT INTO Electronic_media VALUES (2,'Radio','6 hours');
-INSERT INTO Electronic_media VALUES (3,'Internet','12 hours');
-INSERT INTO Electronic_media VALUES (4,'DVD','7 hours');
-INSERT INTO Electronic_media VALUES (5,'CD','6 hours');
-INSERT INTO Electronic_media VALUES (6,'Blu-ray','7 hours');
-INSERT INTO Electronic_media VALUES (7,'VHS','6 hours');
-INSERT INTO Electronic_media VALUES (8,'HDTV','8 hours');
-INSERT INTO Electronic_media VALUES (9,'Laserdisc','4 hours');
-INSERT INTO Electronic_media VALUES (10,'Ultraviolet','2 hours');
+INSERT INTO Electronic_media VALUES (1,'TV',8);
+INSERT INTO Electronic_media VALUES (2,'Radio',6);
+INSERT INTO Electronic_media VALUES (3,'Internet',12);
+INSERT INTO Electronic_media VALUES (4,'DVD',7);
+INSERT INTO Electronic_media VALUES (5,'CD',6);
+INSERT INTO Electronic_media VALUES (6,'Blu-ray',7);
+INSERT INTO Electronic_media VALUES (7,'VHS',6);
+INSERT INTO Electronic_media VALUES (8,'HDTV',8);
+INSERT INTO Electronic_media VALUES (9,'Laserdisc',4);
+INSERT INTO Electronic_media VALUES (10,'Ultraviolet',2);
+
 
 -- INSERTING IN Print_media TABLE
 
@@ -605,7 +606,7 @@ INSERT INTO Olympic_staff VALUES (5,25,'Tom Holland','Worker');
 SELECT * FROM Brands;
 SELECT * FROM Medical_test;
 SELECT * FROM Events;
-SELECT * FROM Weather_Condition;
+SELECT * FROM Weather_condition;
 SELECT * FROM Country;
 SELECT * FROM Electronic_media;
 SELECT * FROM Print_media;
@@ -622,20 +623,44 @@ SELECT * FROM Fitness_checkup;
 
 -- 1. List top 3 nations with the highest overall rating
 
-SELECT cid, country_name, rating FROM 
+SELECT country_name, rating FROM 
 Country NATURAL JOIN Olympic_host
 ORDER BY rating DESC
 LIMIT 3;
 
 -- 2.  Give the count of players participating in olympics from different nations.
 
-SELECT cid, country_name, COUNT(pid) AS no_of_players FROM
+SELECT country_name, COUNT(pid) AS no_of_players FROM
 Player NATURAL JOIN Country
 GROUP BY cid, country_name;
 
 -- 3. Give the count of players associated with Jalal brand
 
-SELECT bid, brand_name, COUNT(pid) AS total_players FROM
+SELECT brand_name, COUNT(pid) AS total_players FROM
 Player_association NATURAL JOIN Brands
 WHERE brand_name = 'Jalal'
 GROUP BY bid, brand_name;
+
+--4. List the current world record and player's personal best for Javelin in Track and Field 
+-- sports category with player name in increasing age 
+
+SELECT name, age, personal_best, world_record FROM 
+Events NATURAL JOIN Player_participation 
+NATURAL JOIN Player
+WHERE sport_name='Track and Field' AND  event_name='Javelin'
+ORDER BY Player.Age; 
+
+--5. Get the countries whose weather condititon is temperature < 32 and wind speed > 10 during olympics
+
+SELECT country_name, temperature_c, wind_speed FROM
+Country NATURAL JOIN Olympic_host
+NATURAL JOIN Weather_condition
+WHERE (temperature_c < 32 AND wind_speed > 10);
+
+--6. List countries in the decreasing order of the streaming duration of Olympics
+
+SELECT country_name, SUM(streaming_duration_hrs) AS total_streaming_duration FROM 
+Country NATURAL JOIN Electronic_accessibility
+NATURAL JOIN Electronic_media 
+GROUP BY cid,emid 
+ORDER BY SUM(streaming_duration_hrs) DESC;

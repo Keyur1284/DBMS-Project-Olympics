@@ -1,3 +1,24 @@
+
+
+
+--SELECT * FROM Brands;
+--SELECT * FROM Medical_test;
+--SELECT * FROM Events;
+--SELECT * FROM Weather_Condition;
+--SELECT * FROM Country;
+--SELECT * FROM Electronic_media;
+--SELECT * FROM Print_media;
+--SELECT * FROM Player;
+--SELECT * FROM Electronic_accessibility;
+--SELECT * FROM Print_accessibility;
+--SELECT * FROM Electronic_languages;
+--SELECT * FROM Print_languages;
+--SELECT * FROM Player_participation;
+--SELECT * FROM Player_association;
+--SELECT * FROM Olympic_host;
+--SELECT * FROM Olympic_staff;
+--SELECT * FROM Fitness_checkup;
+
 DROP SCHEMA Olympidb CASCADE;
 CREATE SCHEMA Olympidb;
 SET SEARCH_PATH TO Olympidb;
@@ -39,7 +60,7 @@ CREATE TABLE Country(
 CREATE TABLE Electronic_media(
 	EmID INT PRIMARY KEY,
 	Electronic_name TEXT ,
-	Streaming_duration TEXT 
+	Streaming_duration_hrs INT 
 );
 
 CREATE TABLE Print_media(
@@ -211,16 +232,16 @@ INSERT INTO Country VALUES (15,'Netherlands','Europe','UTC +1:00');
 
 -- INSERTING IN Electronic_media TABLE
 
-INSERT INTO Electronic_media VALUES (1,'TV','8 hours');
-INSERT INTO Electronic_media VALUES (2,'Radio','6 hours');
-INSERT INTO Electronic_media VALUES (3,'Internet','12 hours');
-INSERT INTO Electronic_media VALUES (4,'DVD','7 hours');
-INSERT INTO Electronic_media VALUES (5,'CD','6 hours');
-INSERT INTO Electronic_media VALUES (6,'Blu-ray','7 hours');
-INSERT INTO Electronic_media VALUES (7,'VHS','6 hours');
-INSERT INTO Electronic_media VALUES (8,'HDTV','8 hours');
-INSERT INTO Electronic_media VALUES (9,'Laserdisc','4 hours');
-INSERT INTO Electronic_media VALUES (10,'Ultraviolet','2 hours');
+INSERT INTO Electronic_media VALUES (1,'TV',8);
+INSERT INTO Electronic_media VALUES (2,'Radio',6);
+INSERT INTO Electronic_media VALUES (3,'Internet',12);
+INSERT INTO Electronic_media VALUES (4,'DVD',7);
+INSERT INTO Electronic_media VALUES (5,'CD',6);
+INSERT INTO Electronic_media VALUES (6,'Blu-ray',7);
+INSERT INTO Electronic_media VALUES (7,'VHS',6);
+INSERT INTO Electronic_media VALUES (8,'HDTV',8);
+INSERT INTO Electronic_media VALUES (9,'Laserdisc',4);
+INSERT INTO Electronic_media VALUES (10,'Ultraviolet',2);
 
 -- INSERTING IN Print_media TABLE
 
@@ -305,6 +326,7 @@ INSERT INTO Player VALUES (50,'M','Tipendra Surti','7.35 m',24,173,57,10);
 -- INSERTING IN ELECTRONIC_ACCESSIBILITY TABLE
 
 INSERT INTO Electronic_accessibility VALUES (9,1,'14:30');
+INSERT INTO Electronic_accessibility VALUES (2,1,'14:30');
 INSERT INTO Electronic_accessibility VALUES (3,2,'4:00');
 INSERT INTO Electronic_accessibility VALUES (1,3,'19:00');
 INSERT INTO Electronic_accessibility VALUES (3,4,'18:00');
@@ -319,6 +341,8 @@ INSERT INTO Electronic_accessibility VALUES (6,12,'6:00');
 INSERT INTO Electronic_accessibility VALUES (2,13,'11:00');
 INSERT INTO Electronic_accessibility VALUES (9,14,'3:00');
 INSERT INTO Electronic_accessibility VALUES (2,15,'10:00');
+INSERT INTO Electronic_accessibility VALUES (1,9,'10:00');
+INSERT INTO Electronic_accessibility VALUES (7,15,'10:00');
 
 -- INSERTING IN ELECTRONIC_LANGUAGES TABLE
 
@@ -619,4 +643,11 @@ SELECT * FROM Player_association;
 SELECT * FROM Olympic_host;
 SELECT * FROM Olympic_staff;
 SELECT * FROM Fitness_checkup;
+
+--List countries in the decreasing order of the streaming duration of Olympics
+
+SELECT country_name,sum(streaming_duration_hrs) FROM Country 
+NATURAL JOIN Electronic_accessibility
+NATURAL JOIN Electronic_media 
+GROUP BY cid,emid ORDER BY sum(streaming_duration_hrs) DESC;
 
