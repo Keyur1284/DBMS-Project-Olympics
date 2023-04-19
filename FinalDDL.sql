@@ -1,3 +1,4 @@
+
 DROP SCHEMA Olympidb CASCADE;
 CREATE SCHEMA Olympidb;
 SET SEARCH_PATH TO Olympidb;
