@@ -23,7 +23,7 @@ CREATE TABLE Events(
 
 CREATE TABLE Weather_condition(
 	WID INT PRIMARY KEY,
-	Temperature TEXT ,
+	Temperature_C INT ,
 	Air_quality TEXT ,
 	Humidity NUMERIC (4,2) ,
 	Wind_speed INT 
@@ -185,11 +185,11 @@ INSERT INTO Events VALUES (10,'Pole Vault','Track and Field','7.12 m','6.03 m');
 
 -- INSERTING IN WEATHER_CONDITION TABLE
 
-INSERT INTO Weather_condition VALUES (1,'30 C','Good',5.23,10);
-INSERT INTO Weather_condition VALUES (2,'24 C','Good',20.42,15);
-INSERT INTO Weather_condition VALUES (3,'27 C','Moderate',15.78,12);
-INSERT INTO Weather_condition VALUES (4,'32 C','Good',28.34,18);
-INSERT INTO Weather_condition VALUES (5,'35 C','Moderate',14.62,9);
+INSERT INTO Weather_condition VALUES (1,'30','Good',5.23,10);
+INSERT INTO Weather_condition VALUES (2,'24','Good',20.42,15);
+INSERT INTO Weather_condition VALUES (3,'27','Moderate',15.78,12);
+INSERT INTO Weather_condition VALUES (4,'32','Good',28.34,18);
+INSERT INTO Weather_condition VALUES (5,'35','Moderate',14.62,9);
 
 -- INSERTING IN COUNTRY TABLE
 
