@@ -644,15 +644,23 @@ GROUP BY bid, brand_name;
 --4. List the current world record and player's personal best for Javelin in Track and Field 
 -- sports category with player name in increasing age 
 
-SELECT Name, Age, Personal_best, World_record FROM 
+SELECT name, age, personal_best, world_record FROM 
 Events NATURAL JOIN Player_participation 
 NATURAL JOIN Player
-WHERE Sport_name='Track and Field' AND  Event_name='Javelin'
+WHERE sport_name='Track and Field' AND  event_name='Javelin'
 ORDER BY Player.Age; 
 
 --5. Get the countries whose weather condititon is temperature < 32 and wind speed > 10 during olympics
 
-SELECT Country_name, Temperature_C, Wind_speed FROM
+SELECT country_name, temperature_c, wind_speed FROM
 Country NATURAL JOIN Olympic_host
 NATURAL JOIN Weather_condition
-WHERE (Temperature_C < 32 AND Wind_speed > 10);
+WHERE (temperature_c < 32 AND wind_speed > 10);
+
+--6. List countries in the decreasing order of the streaming duration of Olympics
+
+SELECT country_name, SUM(streaming_duration_hrs) AS total_streaming_duration FROM 
+Country NATURAL JOIN Electronic_accessibility
+NATURAL JOIN Electronic_media 
+GROUP BY cid,emid 
+ORDER BY SUM(streaming_duration_hrs) DESC;
