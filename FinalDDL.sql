@@ -664,3 +664,21 @@ Country NATURAL JOIN Electronic_accessibility
 NATURAL JOIN Electronic_media 
 GROUP BY cid,emid 
 ORDER BY SUM(streaming_duration_hrs) DESC;
+
+-- 7. List top 10 players with highest total endorsed money from different brands.
+
+SELECT name, SUM(endorsed_money) AS total_endorsed_money FROM 
+Player NATURAL JOIN Player_association
+NATURAL JOIN Brands
+GROUP BY Player.name
+ORDER BY SUM(endorsed_money) DESC
+LIMIT 10;
+
+-- 8. List the player names and their origin country who are unfit to 
+-- participate(either their dopamine test is positive or their ecg report is abnormal)
+
+SELECT name, country_name, test_name, result FROM 
+Player NATURAL JOIN Fitness_checkup
+NATURAL JOIN Medical_test 
+NATURAL JOIN Country 
+WHERE (mid=1 AND result='Positive') OR (mid=2 AND result='Abnormal');
