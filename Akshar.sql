@@ -655,3 +655,23 @@ FROM Country
 NATURAL JOIN Olympic_host
 NATURAL JOIN Weather_condition
 WHERE (Temperature_C < 32 and Wind_speed >10);
+
+-- 6. List player with max endorsed money 2011 and 2019 between.
+--  with brand name.
+SELECT Brand_name as Brand ,max(Endorsed_money) as Income, Name, Year
+FROM Olympic_host
+NATURAL JOIN Country
+NATURAL JOIN Player
+NATURAL JOIN Player_association
+NATURAL JOIN Brands
+WHERE Year BETWEEN 2011 AND 2019
+Group by Brand_name,Player.Name ,Year, BID order by BID;
+-- 7. Most popular print media for a country during last 10 years.
+
+SELECT Print_name as Popular_media,max(Copies_sold)as copies_sold, Country_name, Year
+FROM Print_media
+NATURAL JOIN Print_Languages
+NATURAL JOIN Country
+NATURAL JOIN Olympic_host
+WHERE (Year BETWEEN 2013 AND 2023)
+Group by Print_name,Country_name ,Year;
