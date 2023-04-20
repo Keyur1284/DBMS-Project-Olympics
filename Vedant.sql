@@ -657,3 +657,14 @@ SELECT country_name,print_language, sum(copies_sold) FROM print_media NATURAL JO
 NATURAL JOIN print_languages NATURAL JOIN Country
 GROUP BY country_name,print_language
 ORDER BY sum(copies_sold) DESC;
+
+--List the player name, sport name and name of the brands of the players associated with more than one brand.
+SELECT name, sport_name FROM events
+NATURAL JOIN player_participation
+NATURAL JOIN player
+NATURAL JOIN
+(SELECT pid, count(pid) as no_of_brands FROM brands
+NATURAL JOIN Player_association
+NATURAL JOIN player
+GROUP BY player_association.pid
+HAVING count(pid)>1) AS temp;
