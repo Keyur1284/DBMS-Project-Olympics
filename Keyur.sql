@@ -750,3 +750,31 @@ NATURAL JOIN
 	GROUP BY player_association.pid
 	HAVING count(pid)>1
 ) AS temp;
+
+--15. List podium finishers(name of player and their country) in Pole Vault
+
+SELECT country_name, name, result FROM Player 
+NATURAL JOIN Player_participation NATURAL JOIN Country 
+NATURAL JOIN Events 
+WHERE event_name = 'Pole Vault' 
+ORDER BY RESULT DESC 
+LIMIT 3;
+
+--16. List the duty wise count of olympic staff for all the countries 
+-- which hosted olympics along with year. 
+
+SELECT country_name, year, duty, count(stid) FROM 
+Olympic_staff NATURAL JOIN Country 
+NATURAL JOIN Olympic_host 
+GROUP BY country_name, duty, year 
+ORDER BY country_name;
+
+--17. Retrieve the names of countries, electronic media, electronic languages, 
+-- and start times for electronic media accessible in those countries
+-- in alphabetical order by country name
+
+SELECT country_name, electronic_name, electronic_language, start_time FROM
+Country NATURAL JOIN electronic_languages
+NATURAL JOIN electronic_media
+NATURAL JOIN electronic_accessibility
+ORDER BY country_name;
