@@ -675,3 +675,21 @@ NATURAL JOIN Country
 NATURAL JOIN Olympic_host
 WHERE (Year BETWEEN 2013 AND 2023)
 Group by Print_name,Country_name ,Year;
+
+SELECT Country_name, Year, UTC AS timezone
+FROM Country
+NATURAL JOIN Olympic_host
+WHERE Continent='Asia' AND Year BETWEEN 2011 AND 2023
+ORDER BY UTC;
+
+SElect  Name, Personal_best, World_record,Olympic_record 
+From Events 
+Join Player_participation on Player_participation.EvID = Events.EvID
+Join Player on Player_participation.PID = Player.PID
+join Fitness_checkup on Player.PID = Fitness_checkup.PID
+where Fitness_checkup.Result = 'Normal';
+
+
+Select name,Age,Height,Weight, ROUND((Weight*10000/(Height*Height)),2) as bmi 
+from Player
+order by Name;
