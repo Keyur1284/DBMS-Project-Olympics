@@ -651,3 +651,9 @@ NATURAL JOIN Electronic_accessibility
 NATURAL JOIN Electronic_media 
 GROUP BY cid,emid ORDER BY sum(streaming_duration_hrs) DESC;
 
+--List the country-wise and language-wise count of the copies sold  
+
+SELECT country_name,print_language, sum(copies_sold) FROM print_media NATURAL JOIN print_accessibility 
+NATURAL JOIN print_languages NATURAL JOIN Country
+GROUP BY country_name,print_language
+ORDER BY sum(copies_sold) DESC;
