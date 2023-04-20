@@ -656,7 +656,7 @@ GROUP BY cid,emid ORDER BY sum(streaming_duration_hrs) DESC;
 SELECT country_name,print_language, sum(copies_sold) FROM print_media NATURAL JOIN print_accessibility 
 NATURAL JOIN print_languages NATURAL JOIN Country
 GROUP BY country_name,print_language
-ORDER BY sum(copies_sold) DESC;
+ORDER BY sum(copies_sold) DESC;
 
 --List the player name, sport name and name of the brands of the players associated with more than one brand.
 SELECT name, sport_name FROM events
