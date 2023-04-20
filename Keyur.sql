@@ -63,7 +63,7 @@ CREATE TABLE Player(
 CREATE TABLE Fitness_checkup(
 	PID INT ,
 	MID INT ,
-	Result TEXT,
+	Report TEXT,
 	PRIMARY KEY (PID,MID),
 	FOREIGN KEY (PID) REFERENCES Player(PID) ,
 	FOREIGN KEY (MID) REFERENCES Medical_test(MID) 
@@ -185,11 +185,11 @@ INSERT INTO Events VALUES (10,'Pole Vault','Track and Field','7.12 m','6.03 m');
 
 -- INSERTING IN WEATHER_CONDITION TABLE
 
-INSERT INTO Weather_condition VALUES (1,'30','Good',5.23,10);
+INSERT INTO Weather_condition VALUES (1,'30','Good',61.23,10);
 INSERT INTO Weather_condition VALUES (2,'24','Good',20.42,15);
-INSERT INTO Weather_condition VALUES (3,'27','Moderate',15.78,12);
+INSERT INTO Weather_condition VALUES (3,'27','Moderate',80.78,12);
 INSERT INTO Weather_condition VALUES (4,'32','Good',28.34,18);
-INSERT INTO Weather_condition VALUES (5,'35','Moderate',14.62,9);
+INSERT INTO Weather_condition VALUES (5,'35','Moderate',98.62,9);
 
 -- INSERTING IN COUNTRY TABLE
 
@@ -198,7 +198,7 @@ INSERT INTO Country VALUES (2,'USA','North America','UTC -5:00');
 INSERT INTO Country VALUES (3,'Australia','Australia','UTC +10:00');
 INSERT INTO Country VALUES (4,'Japan','Asia','UTC +9:00');
 INSERT INTO Country VALUES (5,'China','Asia','UTC +8:00');
-INSERT INTO Country VALUES (6,'Russia','Europe','UTC +3:00');
+INSERT INTO Country VALUES (6,'Russia','Asia','UTC +3:00');
 INSERT INTO Country VALUES (7,'Germany','Europe','UTC +1:00');
 INSERT INTO Country VALUES (8,'France','Europe','UTC +1:00');
 INSERT INTO Country VALUES (9,'Italy','Europe','UTC +1:00');
@@ -552,7 +552,7 @@ INSERT INTO Player_association VALUES (8,8,1);
 INSERT INTO Player_association VALUES (9,9,2);
 INSERT INTO Player_association VALUES (10,10,2);
 INSERT INTO Player_association VALUES (11,11,1);
-INSERT INTO Player_association VALUES (11,14,2);
+INSERT INTO Player_association VALUES (12,14,2);
 INSERT INTO Player_association VALUES (12,12,3);
 INSERT INTO Player_association VALUES (13,13,2);
 INSERT INTO Player_association VALUES (14,14,1);
@@ -584,24 +584,36 @@ INSERT INTO Olympic_staff VALUES (2,7,'Sam Curran','Electrician');
 INSERT INTO Olympic_staff VALUES (2,8,'Chris Jordan','Doctor');
 INSERT INTO Olympic_staff VALUES (2,9,'Mark Gates','General');
 INSERT INTO Olympic_staff VALUES (2,10,'Bill Zuckerberg','Worker');
+INSERT INTO Olympic_staff VALUES (2,35,'Tom Desai','Electrician');
+INSERT INTO Olympic_staff VALUES (2,36,'Karl Cooper','General');
+INSERT INTO Olympic_staff VALUES (2,37,'Jack Knight','Supervisor');
 
 INSERT INTO Olympic_staff VALUES (3,11,'Jeff Gezos','Supervisor');
 INSERT INTO Olympic_staff VALUES (3,12,'Warren Buffet','Electrician');
 INSERT INTO Olympic_staff VALUES (3,13,'Mitchell Smith','Doctor');
 INSERT INTO Olympic_staff VALUES (3,14,'Steve Starc','General');
 INSERT INTO Olympic_staff VALUES (3,15,'Ellyse Perry','Worker');
+INSERT INTO Olympic_staff VALUES (3,32,'Smith Termad','Electrician');
+INSERT INTO Olympic_staff VALUES (3,33,'Mitch Taylor','General');
+INSERT INTO Olympic_staff VALUES (3,34,'Sana Khan','Electrician');
 
-INSERT INTO Olympic_staff VALUES (4,16,'Chang zi','Supervisor');
-INSERT INTO Olympic_staff VALUES (4,17,'Fang Li','Electrician');
-INSERT INTO Olympic_staff VALUES (4,18,'Yan Xiu','Doctor');
-INSERT INTO Olympic_staff VALUES (4,19,'Marco Van Der Dussen','General');
-INSERT INTO Olympic_staff VALUES (4,20,'Usman Baghdadi','Worker');
+INSERT INTO Olympic_staff VALUES (6,16,'Chang zi','Supervisor');
+INSERT INTO Olympic_staff VALUES (6,17,'Fang Li','Electrician');
+INSERT INTO Olympic_staff VALUES (6,18,'Yan Xiu','Doctor');
+INSERT INTO Olympic_staff VALUES (6,19,'Marco Van Der Dussen','General');
+INSERT INTO Olympic_staff VALUES (6,20,'Usman Baghdadi','Worker');
+INSERT INTO Olympic_staff VALUES (6,29,'Katy Perry','Doctor');
+INSERT INTO Olympic_staff VALUES (6,30,'Jackie Chan','General');
+INSERT INTO Olympic_staff VALUES (6,31,'Donald Trump','Worker');
 
 INSERT INTO Olympic_staff VALUES (5,21,'Dmitry Ivan','Supervisor');
 INSERT INTO Olympic_staff VALUES (5,22,'Vladimir Trump','Electrician');
 INSERT INTO Olympic_staff VALUES (5,23,'Joe Bell','Doctor');
 INSERT INTO Olympic_staff VALUES (5,24,'Zendaya Maree','General');
 INSERT INTO Olympic_staff VALUES (5,25,'Tom Holland','Worker');
+INSERT INTO Olympic_staff VALUES (5,26,'Kate Winslet','General');
+INSERT INTO Olympic_staff VALUES (5,27,'Sophia Rana','Supervisor');
+INSERT INTO Olympic_staff VALUES (5,28,'Tim Miller','Doctor');
 
 SELECT * FROM Brands;
 SELECT * FROM Medical_test;
@@ -641,8 +653,8 @@ Player_association NATURAL JOIN Brands
 WHERE brand_name = 'Jalal'
 GROUP BY bid, brand_name;
 
---4. List the current world record and player's personal best for Javelin in Track and Field 
--- sports category with player name in increasing age 
+--4. List the current world record and player's personal best for 
+-- Javelin in Track and Field sports category with player name in increasing age 
 
 SELECT name, age, personal_best, world_record FROM 
 Events NATURAL JOIN Player_participation 
@@ -650,7 +662,8 @@ NATURAL JOIN Player
 WHERE sport_name='Track and Field' AND  event_name='Javelin'
 ORDER BY Player.Age; 
 
---5. Get the countries whose weather condititon is temperature < 32 and wind speed > 10 during olympics
+--5. Get the countries whose weather condititon is temperature < 32 and 
+-- wind speed > 10 during olympics
 
 SELECT country_name, temperature_c, wind_speed FROM
 Country NATURAL JOIN Olympic_host
@@ -662,10 +675,10 @@ WHERE (temperature_c < 32 AND wind_speed > 10);
 SELECT country_name, SUM(streaming_duration_hrs) AS total_streaming_duration FROM 
 Country NATURAL JOIN Electronic_accessibility
 NATURAL JOIN Electronic_media 
-GROUP BY cid,emid 
+GROUP BY cid 
 ORDER BY SUM(streaming_duration_hrs) DESC;
 
--- 7. List top 10 players with highest total endorsed money from different brands.
+--7. List top 10 players with highest total endorsed money from different brands.
 
 SELECT name, SUM(endorsed_money) AS total_endorsed_money FROM 
 Player NATURAL JOIN Player_association
@@ -674,11 +687,43 @@ GROUP BY Player.name
 ORDER BY SUM(endorsed_money) DESC
 LIMIT 10;
 
--- 8. List the player names and their origin country who are unfit to 
+--8. List the player names and their origin country who are unfit to 
 -- participate(either their dopamine test is positive or their ecg report is abnormal)
 
-SELECT name, country_name, test_name, result FROM 
+SELECT name, country_name, test_name, report FROM 
 Player NATURAL JOIN Fitness_checkup
 NATURAL JOIN Medical_test 
 NATURAL JOIN Country 
-WHERE (mid=1 AND result='Positive') OR (mid=2 AND result='Abnormal');
+WHERE (mid=1 AND report='Positive') OR (mid=2 AND report='Abnormal');
+
+--9. List Countries (in the order that they have hosted) from Asia which have 
+-- hosted the olympic between 2011 and 2023
+
+SELECT country_name, year FROM 
+Country NATURAL JOIN Olympic_host
+WHERE Continent='Asia' AND year BETWEEN 2011 AND 2023
+ORDER BY year;
+
+--10. Compare the World record, Olympic record and Player's personal best
+-- for those players who passed the dopamine test.
+
+SELECT name, personal_best, world_record, olympic_record FROM
+Player NATURAL JOIN Player_participation
+NATURAL JOIN Events
+NATURAL JOIN Fitness_checkup AS FC
+WHERE (mid = 1 AND FC.report = 'Negative');
+
+--11. Get the BMI of the players with value upto 2 decimal place.
+
+SELECT name, age, height, weight, ROUND((weight*10000/(height*height)),2) AS bmi 
+FROM Player
+ORDER BY name;
+
+--12. Find countries with highest probability of precipitaion 
+-- during its olympic hosting (Hint: Humidity > 60 and Temperature > 25)
+
+SELECT Country_name,Continent,Humidity,Temperature_c AS temperature
+FROM Weather_condition
+NATURAL JOIN Olympic_host
+NATURAL JOIN Country
+WHERE Humidity > 60 AND Temperature_c > 25;
