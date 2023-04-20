@@ -727,3 +727,26 @@ FROM Weather_condition
 NATURAL JOIN Olympic_host
 NATURAL JOIN Country
 WHERE Humidity > 60 AND Temperature_c > 25;
+
+--13. List the country-wise and language-wise count of the copies sold  
+
+SELECT country_name,print_language, SUM(copies_sold) AS total_copies_sold FROM print_media 
+NATURAL JOIN Print_accessibility 
+NATURAL JOIN Print_languages 
+NATURAL JOIN Country
+GROUP BY country_name,print_language
+ORDER BY SUM(copies_sold) DESC;
+
+--14. List the player name and sport name of the players associated with more than one brand.
+
+SELECT name, sport_name FROM events
+NATURAL JOIN player_participation
+NATURAL JOIN player
+NATURAL JOIN
+(
+	SELECT pid, count(pid) as no_of_brands FROM brands
+	NATURAL JOIN Player_association
+	NATURAL JOIN player
+	GROUP BY player_association.pid
+	HAVING count(pid)>1
+) AS temp;
