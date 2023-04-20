@@ -696,3 +696,11 @@ WHERE Fitness_checkup.Result = 'Normal';
 SELECT name,Age,Height,Weight, ROUND((Weight*10000/(Height*Height)),2) AS bmi 
 FROM Player
 ORDER BY Name;
+
+-- Find countries with highest probability of precipitaion 
+-- during its olympic hosting 
+SELECT Country_name,Continent,Humidity,Temperature_c AS temperature
+FROM Weather_condition
+NATURAL JOIN Olympic_host
+NATURAL JOIN Country
+WHERE Humidity>60 AND Temperature_c > 25;
