@@ -256,7 +256,7 @@ INSERT INTO Player VALUES (9,'F','Tarika Patel','46.48 s',23,173,58,11);
 INSERT INTO Player VALUES (10,'F','Tanisha Raj','47.32 s',24,167,53,3);
 
 INSERT INTO Player VALUES (11,'M','Raj Tomar','10.22 s',24,180,59,14);
-INSERT INTO Player VALUES (12,'M','Rana Sharma','11.74 s',23,163,50,2);
+INSERT INTO Player VALUES (12,'M','Rana Sharma','11.74 s',23,163,50,8);
 INSERT INTO Player VALUES (13,'M','Rajesh Kumar','13.12 s',23,175,55,4);
 INSERT INTO Player VALUES (14,'M','Tanish Tayal','10.65 s',22,175,65,6);
 INSERT INTO Player VALUES (15,'M','Tinku Patel','12.74 s',22,162,60,8);
