@@ -778,3 +778,28 @@ Country NATURAL JOIN electronic_languages
 NATURAL JOIN electronic_media
 NATURAL JOIN electronic_accessibility
 ORDER BY country_name;
+
+--18. Give name of the country (country name and count of medals) 
+-- which won maximum number of medals in sprint events.
+
+SELECT country_name, COUNT(pid) AS total_medals FROM 
+Country NATURAL JOIN Player 
+WHERE pid IN
+(
+	(
+		SELECT pid FROM player_participation WHERE evid=3 
+	 	ORDER BY RESULT ASC 
+		LIMIT 3
+	)
+ 
+	UNION
+	
+	(
+		SELECT pid FROM player_participation WHERE evid=4 
+		ORDER BY RESULT ASC 
+		LIMIT 3
+	)
+)
+GROUP BY country_name
+ORDER BY count(pid) DESC 
+LIMIT 1;
