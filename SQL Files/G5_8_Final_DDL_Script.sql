@@ -119,10 +119,12 @@ CREATE TABLE Olympic_host(
 
 CREATE TABLE Olympic_staff(
 	CID INT ,
-	StID INT PRIMARY KEY,
+	Year INT ,
+	StID INT ,
 	Staff_name TEXT,
 	Duty TEXT,
-	FOREIGN KEY (CID) REFERENCES Country(CID)  
+	PRIMARY KEY (CID,Year,StID),
+	FOREIGN KEY (CID,Year) REFERENCES Olympic_host(CID,Year)  
 );
 
 CREATE TABLE Print_languages(

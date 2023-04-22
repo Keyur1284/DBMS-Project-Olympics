@@ -120,10 +120,12 @@ CREATE TABLE Olympic_host(
 
 CREATE TABLE Olympic_staff(
 	CID INT ,
-	StID INT PRIMARY KEY,
+	Year INT ,
+	StID INT ,
 	Staff_name TEXT,
 	Duty TEXT,
-	FOREIGN KEY (CID) REFERENCES Country(CID)  
+	PRIMARY KEY (CID,Year,StID),
+	FOREIGN KEY (CID,Year) REFERENCES Olympic_host(CID,Year)  
 );
 
 CREATE TABLE Print_languages(
@@ -573,47 +575,47 @@ INSERT INTO Olympic_host VALUES (6,2007,40,12,8.07,5);
 
 -- INSERTING IN OLYMPIC_STAFF TABLE
 
-INSERT INTO Olympic_staff VALUES (1,1,'Savant kumar','Supervisor');
-INSERT INTO Olympic_staff VALUES (1,2,'Aakash Patel','Electrician');
-INSERT INTO Olympic_staff VALUES (1,3,'Abhishek Chaudhary','Doctor');
-INSERT INTO Olympic_staff VALUES (1,4,'Ashirvad Singh','General');
-INSERT INTO Olympic_staff VALUES (1,5,'Deepanshu Sharma','Worker');
+INSERT INTO Olympic_staff VALUES (1,2023,1,'Savant kumar','Supervisor');
+INSERT INTO Olympic_staff VALUES (1,2023,2,'Aakash Patel','Electrician');
+INSERT INTO Olympic_staff VALUES (1,2023,3,'Abhishek Chaudhary','Doctor');
+INSERT INTO Olympic_staff VALUES (1,2023,4,'Ashirvad Singh','General');
+INSERT INTO Olympic_staff VALUES (1,2023,5,'Deepanshu Sharma','Worker');
 
-INSERT INTO Olympic_staff VALUES (2,6,'Alex Carey','Supervisor');
-INSERT INTO Olympic_staff VALUES (2,7,'Sam Curran','Electrician');
-INSERT INTO Olympic_staff VALUES (2,8,'Chris Jordan','Doctor');
-INSERT INTO Olympic_staff VALUES (2,9,'Mark Gates','General');
-INSERT INTO Olympic_staff VALUES (2,10,'Bill Zuckerberg','Worker');
-INSERT INTO Olympic_staff VALUES (2,35,'Tom Desai','Electrician');
-INSERT INTO Olympic_staff VALUES (2,36,'Karl Cooper','General');
-INSERT INTO Olympic_staff VALUES (2,37,'Jack Knight','Supervisor');
+INSERT INTO Olympic_staff VALUES (2,2015,6,'Alex Carey','Supervisor');
+INSERT INTO Olympic_staff VALUES (2,2015,7,'Sam Curran','Electrician');
+INSERT INTO Olympic_staff VALUES (2,2015,8,'Chris Jordan','Doctor');
+INSERT INTO Olympic_staff VALUES (2,2015,9,'Mark Gates','General');
+INSERT INTO Olympic_staff VALUES (2,2015,10,'Bill Zuckerberg','Worker');
+INSERT INTO Olympic_staff VALUES (2,2015,35,'Tom Desai','Electrician');
+INSERT INTO Olympic_staff VALUES (2,2015,36,'Karl Cooper','General');
+INSERT INTO Olympic_staff VALUES (2,2015,37,'Jack Knight','Supervisor');
 
-INSERT INTO Olympic_staff VALUES (3,11,'Jeff Gezos','Supervisor');
-INSERT INTO Olympic_staff VALUES (3,12,'Warren Buffet','Electrician');
-INSERT INTO Olympic_staff VALUES (3,13,'Mitchell Smith','Doctor');
-INSERT INTO Olympic_staff VALUES (3,14,'Steve Starc','General');
-INSERT INTO Olympic_staff VALUES (3,15,'Ellyse Perry','Worker');
-INSERT INTO Olympic_staff VALUES (3,32,'Smith Termad','Electrician');
-INSERT INTO Olympic_staff VALUES (3,33,'Mitch Taylor','General');
-INSERT INTO Olympic_staff VALUES (3,34,'Sana Khan','Electrician');
+INSERT INTO Olympic_staff VALUES (3,2019,11,'Jeff Gezos','Supervisor');
+INSERT INTO Olympic_staff VALUES (3,2019,12,'Warren Buffet','Electrician');
+INSERT INTO Olympic_staff VALUES (3,2019,13,'Mitchell Smith','Doctor');
+INSERT INTO Olympic_staff VALUES (3,2019,14,'Steve Starc','General');
+INSERT INTO Olympic_staff VALUES (3,2019,15,'Ellyse Perry','Worker');
+INSERT INTO Olympic_staff VALUES (3,2019,32,'Smith Termad','Electrician');
+INSERT INTO Olympic_staff VALUES (3,2019,33,'Mitch Taylor','General');
+INSERT INTO Olympic_staff VALUES (3,2019,34,'Sana Khan','Electrician');
 
-INSERT INTO Olympic_staff VALUES (6,16,'Chang zi','Supervisor');
-INSERT INTO Olympic_staff VALUES (6,17,'Fang Li','Electrician');
-INSERT INTO Olympic_staff VALUES (6,18,'Yan Xiu','Doctor');
-INSERT INTO Olympic_staff VALUES (6,19,'Marco Van Der Dussen','General');
-INSERT INTO Olympic_staff VALUES (6,20,'Usman Baghdadi','Worker');
-INSERT INTO Olympic_staff VALUES (6,29,'Katy Perry','Doctor');
-INSERT INTO Olympic_staff VALUES (6,30,'Jackie Chan','General');
-INSERT INTO Olympic_staff VALUES (6,31,'Donald Trump','Worker');
+INSERT INTO Olympic_staff VALUES (6,2007,16,'Chang zi','Supervisor');
+INSERT INTO Olympic_staff VALUES (6,2007,17,'Fang Li','Electrician');
+INSERT INTO Olympic_staff VALUES (6,2007,18,'Yan Xiu','Doctor');
+INSERT INTO Olympic_staff VALUES (6,2007,19,'Marco Van Der Dussen','General');
+INSERT INTO Olympic_staff VALUES (6,2007,20,'Usman Baghdadi','Worker');
+INSERT INTO Olympic_staff VALUES (6,2007,29,'Katy Perry','Doctor');
+INSERT INTO Olympic_staff VALUES (6,2007,30,'Jackie Chan','General');
+INSERT INTO Olympic_staff VALUES (6,2007,31,'Donald Trump','Worker');
 
-INSERT INTO Olympic_staff VALUES (5,21,'Dmitry Ivan','Supervisor');
-INSERT INTO Olympic_staff VALUES (5,22,'Vladimir Trump','Electrician');
-INSERT INTO Olympic_staff VALUES (5,23,'Joe Bell','Doctor');
-INSERT INTO Olympic_staff VALUES (5,24,'Zendaya Maree','General');
-INSERT INTO Olympic_staff VALUES (5,25,'Tom Holland','Worker');
-INSERT INTO Olympic_staff VALUES (5,26,'Kate Winslet','General');
-INSERT INTO Olympic_staff VALUES (5,27,'Sophia Rana','Supervisor');
-INSERT INTO Olympic_staff VALUES (5,28,'Tim Miller','Doctor');
+INSERT INTO Olympic_staff VALUES (5,2011,21,'Dmitry Ivan','Supervisor');
+INSERT INTO Olympic_staff VALUES (5,2011,22,'Vladimir Trump','Electrician');
+INSERT INTO Olympic_staff VALUES (5,2011,23,'Joe Bell','Doctor');
+INSERT INTO Olympic_staff VALUES (5,2011,24,'Zendaya Maree','General');
+INSERT INTO Olympic_staff VALUES (5,2011,25,'Tom Holland','Worker');
+INSERT INTO Olympic_staff VALUES (5,2011,26,'Kate Winslet','General');
+INSERT INTO Olympic_staff VALUES (5,2011,27,'Sophia Rana','Supervisor');
+INSERT INTO Olympic_staff VALUES (5,2011,28,'Tim Miller','Doctor');
 
 SELECT * FROM Brands;
 SELECT * FROM Medical_test;
@@ -696,13 +698,30 @@ NATURAL JOIN Medical_test
 NATURAL JOIN Country 
 WHERE (mid=1 AND report='Positive') OR (mid=2 AND report='Abnormal');
 
---9. List Countries (in the order that they have hosted) from Asia which have 
--- hosted the olympic between 2011 and 2023
+--9. Give name of the country (country name and count of medals) 
+-- which won maximum number of medals in sprint events.
 
-SELECT country_name, year FROM 
-Country NATURAL JOIN Olympic_host
-WHERE Continent='Asia' AND year BETWEEN 2011 AND 2023
-ORDER BY year;
+SELECT country_name, COUNT(pid) AS total_medals FROM 
+Country NATURAL JOIN Player 
+WHERE pid IN
+(
+	(
+		SELECT pid FROM player_participation WHERE evid=3 
+	 	ORDER BY RESULT ASC 
+		LIMIT 3
+	)
+ 
+	UNION
+	
+	(
+		SELECT pid FROM player_participation WHERE evid=4 
+		ORDER BY RESULT ASC 
+		LIMIT 3
+	)
+)
+GROUP BY country_name
+ORDER BY count(pid) DESC 
+LIMIT 1;
 
 --10. Compare the World record, Olympic record and Player's personal best
 -- for those players who passed the dopamine test.
@@ -764,8 +783,8 @@ LIMIT 3;
 -- which hosted olympics along with year. 
 
 SELECT country_name, year, duty, count(stid) FROM 
-Olympic_staff NATURAL JOIN Country 
-NATURAL JOIN Olympic_host 
+Olympic_staff NATURAL JOIN Olympic_host 
+NATURAL JOIN  Country
 GROUP BY country_name, duty, year 
 ORDER BY country_name;
 
@@ -779,27 +798,11 @@ NATURAL JOIN electronic_media
 NATURAL JOIN electronic_accessibility
 ORDER BY country_name;
 
---18. Give name of the country (country name and count of medals) 
--- which won maximum number of medals in sprint events.
 
-SELECT country_name, COUNT(pid) AS total_medals FROM 
-Country NATURAL JOIN Player 
-WHERE pid IN
-(
-	(
-		SELECT pid FROM player_participation WHERE evid=3 
-	 	ORDER BY RESULT ASC 
-		LIMIT 3
-	)
- 
-	UNION
-	
-	(
-		SELECT pid FROM player_participation WHERE evid=4 
-		ORDER BY RESULT ASC 
-		LIMIT 3
-	)
-)
-GROUP BY country_name
-ORDER BY count(pid) DESC 
-LIMIT 1;
+--18. List Countries (in the order that they have hosted) from Asia which have 
+-- hosted the olympic between 2011 and 2023
+
+SELECT country_name, year FROM 
+Country NATURAL JOIN Olympic_host
+WHERE Continent='Asia' AND year BETWEEN 2011 AND 2023
+ORDER BY year;
